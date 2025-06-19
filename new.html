@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    .container {
+  display: flex;
+  gap: 1rem;
+  padding: 2rem;
+  flex-wrap: wrap;
+}
+
+.panel {
+  flex: 1;
+  min-width: 200px;
+  transition: flex 0.5s ease;
+  background: #f0f0f0;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.panel.active {
+  flex: 3;
+  background: linear-gradient(to bottom right, #0d486d, #6fc9e4);
+}
+
+.toggle-btn {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.content {
+  padding: 1rem;
+  display: none;
+}
+
+.panel.active .content {
+  display: block;
+}
+.image-hover {
+  position: relative;
+  width: 400px;
+  max-width: 90vw;
+  cursor: pointer;
+}
+
+.image-hover img {
+  width: 100%;
+  display: block;
+  border-radius: 12px;
+  transition: opacity 0.4s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.default-img {
+  z-index: 1;
+}
+
+.hover-img {
+  z-index: 2;
+  opacity: 0;
+}
+
+.image-hover:hover .hover-img {
+  opacity: 1;
+}
+
+.image-hover:hover .default-img {
+  opacity: 0;
+}
+
+</style>
+
+</head>
+<body>
+    <div class="container">
+  <div class="panel active">
+    <button class="toggle-btn">Billing </button>
+    <div class="content">This is for billing section</div>
+     
+  </div>
+  <div class="panel">
+    <button class="toggle-btn">Charging </button>
+    <div class="content">This is for charging</div>
+    
+
+  </div>
+  <div class="panel">
+    <button class="toggle-btn">Events</button>
+    <div class="content">This is  for events. </div>
+  </div>
+</div>
+
+  <div class="image-hover">
+  <img src="images/Screenshot-2024-02-21-at-12.webp" alt="Default" class="default-img" />
+  <img src="images/Understanding the Basics of Billing Software.png.webp" alt="Hover" class="hover-img" />
+</div>
+
+
+
+<script>
+    const panels = document.querySelectorAll('.panel');
+
+panels.forEach(panel => {
+  panel.querySelector('.toggle-btn').addEventListener('click', () => {
+    panels.forEach(p => p.classList.remove('active'));
+    panel.classList.add('active');
+  });
+});
+const img = document.getElementById('main-img');
+
+img.addEventListener('click', () => {
+  img.src = 'images/Understanding the Basics of Billing Software.png.webp';
+});
+
+
+</script>
+<a href="index.html">Click here</a>
+</body>
+</html>

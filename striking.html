@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ 
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ripple Image Motion</title>
+  <style>
+    body {
+  margin: 0;
+  height: 100vh;
+  background: #111;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.image-container {
+  position: relative;
+  display: inline-block;
+}
+
+#main-img {
+  width: 400px;
+  max-width: 90vw;
+  transition: transform 0.3s ease;
+  border-radius: 12px;
+}
+
+.ripple {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  animation: ripple-effect 0.6s ease-out forwards;
+  z-index: 2;
+}
+
+@keyframes ripple-effect {
+  to {
+    transform: translate(-50%, -50%) scale(15);
+    opacity: 0;
+  }
+}
+
+  </style>
+</head>
+<body>
+    <a href="index.html">home page</a>
+  <div class="image-container">
+    <img src="images/color-balls-1427716.jpg" alt="Colorful Balls" id="main-img" />
+  </div>
+
+  <script >const container = document.querySelector('.image-container');
+const image = document.getElementById('main-img');
+
+container.addEventListener('mousemove', (e) => {
+  const ripple = document.createElement('div');
+  ripple.className = 'ripple';
+  ripple.style.left = `${e.offsetX}px`;
+  ripple.style.top = `${e.offsetY}px`;
+  container.appendChild(ripple);
+
+  // Subtle image movement
+  const moveX = (e.offsetX - container.clientWidth / 2) * 0.02;
+  const moveY = (e.offsetY - container.clientHeight / 2) * 0.02;
+  image.style.transform = `translate(${moveX}px, ${moveY}px)`;
+
+  ripple.addEventListener('animationend', () => {
+    ripple.remove();
+  });
+});
+</script>
+</body>
+</html>
